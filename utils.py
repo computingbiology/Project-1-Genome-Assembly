@@ -16,22 +16,15 @@ def generate_random_sequence(N, rng):
     return synthetic_sequence
 
 
-def write_to_file(k_mers, k, filename, metadata):
+def write_to_file(k_mers, filename, metadata):
     """
         Write given k-mer reads to file
     """
      
     # Shuffle k-mer list before giving to students
     random.shuffle(k_mers)
-    
-    # Generate random phred scores
-    phred_scores = []
-    for score in np.random.choice(np.arange(20, 50), size=len(k_mers)*k):
-        phred_scores.append(chr(score + 33))
 
     # Write generated k-mer reads to a file in FASTQ format
-    i = 0
-
     with open(filename, "w") as f:
         for k_mer in k_mers:
             k = len(k_mer)
@@ -43,8 +36,7 @@ def write_to_file(k_mers, k, filename, metadata):
             # '+' on line
             f.write("+\n")
             # Phred33 scores
-            f.write("".join(phred_scores[i:i+k]) + "\n")
-            i += k
+            f.write("j".k + "\n")
 
 
 def generate_sythetic_data(sequence_len, k, seed, filename="TeleTubby.fastq"):
@@ -61,7 +53,7 @@ def generate_sythetic_data(sequence_len, k, seed, filename="TeleTubby.fastq"):
     
     # Write to file (with random scores)
     metadata = "@TeleTubby Genome: Project 1"
-    write_to_file(k_mers, k, filename, metadata)
+    write_to_file(k_mers, filename, metadata)
     
     # Return sequence (for reference)
     return "".join(sequence)
